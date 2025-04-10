@@ -1,4 +1,13 @@
+import random
 from agents.extensions.handoff_prompt import RECOMMENDED_PROMPT_PREFIX
+from agents import Agent, handoff, RunContextWrapper
+
+from customer_service.model import AirlineAgentContext
+from customer_service.tools import faq_lookup_tool, update_seat
+
+async def on_seat_booking_handoff(context: RunContextWrapper[AirlineAgentContext]) -> None:
+    flight_number = f"FLT-{random.randint(100, 999)}"
+    context.context.flight_number = flight_number
 
 faq_agent = Agent[AirlineAgentContext](
     name="FAQ Agent",
