@@ -1,0 +1,16 @@
+[project]
+name = "customer-service"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "openai-agents>=0.0.9",
+]
+
+[project.scripts]
+customer-service = "customer_service:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
