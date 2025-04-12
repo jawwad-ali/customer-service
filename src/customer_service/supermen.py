@@ -22,7 +22,7 @@ faq_agent = Agent[AirlineAgentContext](
     tools=[faq_lookup_tool],
 )
 
-seat_booking_agent = Agent[AirlineAgentContext](
+seat_booking_agent: Agent = Agent[AirlineAgentContext](
     name="Seat Booking Agent",
     handoff_description="A helpful agent that can update a seat on a flight.",
     instructions=f"""{RECOMMENDED_PROMPT_PREFIX}
@@ -36,7 +36,7 @@ seat_booking_agent = Agent[AirlineAgentContext](
     tools=[update_seat],
 )
 
-triage_agent = Agent[AirlineAgentContext](
+triage_agent: Agent = Agent[AirlineAgentContext](
     name="Triage Agent",
     handoff_description="A triage agent that can delegate a customer's request to the appropriate agent.",
     instructions=(
@@ -48,3 +48,6 @@ triage_agent = Agent[AirlineAgentContext](
         handoff(agent=seat_booking_agent, on_handoff=on_seat_booking_handoff),
     ],
 )
+
+faq_agent.handoffs.append(triage_agent)
+seat_booking_agent.handoffs.append(triage_agent)
